@@ -5,7 +5,7 @@
  * @license MIT
  */
 
-namespace craft\contactform\models;
+namespace craft\orderform\models;
 
 use craft\base\Model;
 use craft\web\UploadedFile;
@@ -13,34 +13,34 @@ use craft\web\UploadedFile;
 /**
  * Class Submission
  *
- * @package craft\contactform
+ * @package craft\orderform
  */
 class Submission extends Model
 {
     /**
      * @var string|null
      */
-    public $fromName;
+    public $firstName;
 
     /**
      * @var string|null
      */
-    public $fromEmail;
+    public $lastName;
 
     /**
      * @var string|null
      */
-    public $subject;
+    public $email;
 
     /**
-     * @var string|string[]|null
+     * @var string
      */
-    public $message;
+    public $birthday;
 
     /**
-     * @var UploadedFile[]|null
+     * @var string
      */
-    public $attachment;
+    public $gender;
 
     /**
      * @inheritdoc
@@ -48,10 +48,10 @@ class Submission extends Model
     public function attributeLabels()
     {
         return [
-            'fromName' => \Craft::t('contact-form', 'Your Name'),
-            'fromEmail' => \Craft::t('contact-form', 'Your Email'),
-            'message' => \Craft::t('contact-form', 'Message'),
-            'subject' => \Craft::t('contact-form', 'Subject'),
+            'firstName' => \Craft::t('contact-form', 'Vorname'),
+            'lastName' => \Craft::t('contact-form', 'Nachname'),
+            'email' => \Craft::t('contact-form', 'E-Mail'),
+            'birthday' => \Craft::t('contact-form', 'Geburtstag'),
         ];
     }
 
@@ -61,8 +61,9 @@ class Submission extends Model
     public function rules()
     {
         return [
-            [['fromEmail', 'message'], 'required'],
-            [['fromEmail'], 'email']
+            [['firstName', 'lastName', 'birthday', ], 'required'],
+            [['email'], 'email'],
+            [['birthday'], 'datetime']
         ];
     }
 }

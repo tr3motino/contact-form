@@ -10,40 +10,50 @@ This plugin requires Craft CMS 3.0.0-RC11 or later. (For Craft 2 use the [`v1` b
 
 ## Installation
 
+````notes von alex````
+
+checkout this repo in parallel to craft-installation     
+- .
+- ..
+- craft
+- contact-form
+
+add this to craft/composer.json to the root {}
+```
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "repositories": [
+    {
+      "type": "path",
+      "url": "../order-form"
+    }
+  ]
+```
+```
+# tell Composer to load the plugin
+composer require craftcms/order-form
+  
+# tell Craft to install the plugin
+./craft install/plugin order-form
+```
+you'll see sth. like:
+```
+Package operations: 1 install, 0 updates, 0 removals
+  - Installing craftcms/contact-form (2.2.6): Symlinking from ../contact-form
+```  
+````notes von alex````
+
 You can install this plugin from the Plugin Store or with Composer.
 
-#### From the Plugin Store
-
-Go to the Plugin Store in your project’s Control Panel and search for “Contact Form”. Then click on the “Install” button in its modal window.
-
-#### With Composer
-
-Open your terminal and run the following commands:
-
-```bash
-# go to the project directory
-cd /path/to/my-project.test
-
-# tell Composer to load the plugin
-composer require craftcms/contact-form
-
-# tell Craft to install the plugin
-./craft install/plugin contact-form
-```
-
-## Upgrading from Craft 2
-
-If you’re in the process of upgrading a Craft 2 project to Craft 3, follow these instructions to get Contact Form back up and running:
-
-1. [Install Contact Form 2.x](#installation).
-2. Update the `action` input values in your form templates from `contactForm/sendMessage` to `contact-form/send`.
-3. Make sure the `redirect` input values in your form templates are [hashed](https://docs.craftcms.com/v3/changes-in-craft-3.html#request-params).
-4. If you have a `craft/config/contactform.php` file, move it to `config/` and rename it to `contact-form.php`.
-5. If you were using the honeypot captcha feature, install the new [Contact Form Honeypot](https://github.com/craftcms/contact-form-honeypot) plugin.
 
 ## Usage
 
 Your contact form template can look something like this:
+
+```
+copy the templates/order-form into craft/templates
+and customize
+```
 
 ```twig
 {% macro errorList(errors) %}

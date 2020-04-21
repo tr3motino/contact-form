@@ -5,9 +5,10 @@
  * @license MIT
  */
 
-namespace craft\contactform\models;
+namespace craft\orderform\models;
 
 use craft\base\Model;
+use craft\helpers\DateTimeHelper;
 
 class Settings extends Model
 {
@@ -58,14 +59,21 @@ class Settings extends Model
         }
     }
 
+    public function fields()
+    {
+        $fields = parent::fields();
+
+        return $fields;
+    }
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['toEmail', 'successFlashMessage'], 'required'],
+/*            [['toEmail', 'successFlashMessage'], 'required'],
             [['toEmail', 'prependSender', 'prependSubject', 'successFlashMessage'], 'string'],
+*/
         ];
     }
 }
