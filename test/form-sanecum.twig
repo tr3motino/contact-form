@@ -1,0 +1,81 @@
+{# setup #}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<section id="onboardingForm" class="p-5">
+   <div class="container p-5" style="margin-top: -150px;">
+
+      {# form.comjoo > API #}
+      <form method="post" action="" accept-charset="UTF-8">
+         
+         {{ csrfInput() }}
+         <input type="hidden" name="action" value="contact-form/send">
+         
+         <div class="row bg-white shadow-sm py-5 mx-auto">
+            <div class="col-md-5 offset-md-1 pt-3">
+               <label class="h6" for="firstName">Vorname</label>
+               <input class="w-100" id="firstName" type="text" name="message[firstName]" value="{{ message.message ?? '' }}" required>
+            </div>
+            <div class="col-md-5 pt-3">
+               <label class="h6" for="lastName">Nachname</label>
+               <input class="w-100" id="lastName" type="text" name="message[lastName]" value="{{ message.message ?? '' }}" required>
+            </div>
+           <div class="col-md-5 offset-md-1 pt-3">
+               <label class="h6" for="from-email">E-Mail Adresse</label>
+               <input class="w-100" id="from-email" type="email" name="fromEmail" value="{{ message.fromEmail ?? '' }}" required>
+            </div>
+            <div class="col-md-5 pt-3">
+               <label class="h6" for="birthday">Dein Geburtstag</label>
+               <input class="w-100" id="birthday" type="date" name="message[birthday]" value="{{ message.message ?? '' }}" required>
+            </div>
+            <div class="col-md-7 offset-md-1 pt-5">
+               <h4>Adresse</h4>
+               <p>Seitan ullamco poutine aliquip sustainable edison bulb beard viral qui.</p>
+            </div>
+            <div class="col-md-5 offset-md-1 pt-3">
+               <label class="h6" for="streetAndNr">Straße und Hausnummer</label>
+               <input class="w-100" id="streetAndNr" type="text" name="message[streetAndNr]" value="{{ message.message ?? '' }}" required>
+            </div>
+            <div class="col-md-5 pt-3">
+               <label class="h6" for="city">Stadt</label>
+               <input class="w-100" id="city" type="text" name="message[city]" value="{{ message.message ?? '' }}" required>
+            </div>
+            <div class="col-md-5 offset-md-1 pt-3">
+               <label class="h6" for="zip">Postleitzahl</label>
+               <input class="w-100" id="zip" type="number" name="message[zip]" value="{{ message.message ?? '' }}" required>
+            </div>
+            <div class="col-md-5 pt-3">
+               <label class="h6" for="country">Land <sup>optional</sup></label>
+               <input class="w-100" id="country" type="text" name="message[country]" value="{{ message.message ?? '' }}">
+            </div>
+            <div class="col-10 offset-md-1 pt-4">
+               <label class="h6" for="message">Wie können wir Ihnen helfen?</label> 
+               <textarea class="w-100" rows="5" cols="100" id="message" name="message[body]">{{ message.message ?? '' }}</textarea>
+            </div>
+            <div class="col-1 offset-md-1">
+               <label class="pt-3">
+                  <input class="h-auto" type="checkbox" name="checkTerms" value="yes" {{ message is defined and message.checkTerms ? 'unchecked' }} required>
+               </label>
+            </div>
+            <div class="col-9">
+               <div class="small pt-3 px-4">Bitte bestätige die AGB/Datenschutzrichtlinien.</div>
+            </div>
+
+            <div class="col-md-7 offset-md-1 pt-5">
+               {% if message is defined and message.hasErrors('checkTerms') %}
+               <ul class="errors">
+               <li>{{ 'Bitte bestätige unsere Datenschutzrichtlinien.' }}</li>
+               </ul>
+               {% endif %}
+            </div>
+            <div class="col-md-7 offset-md-1 pt-5">
+               <input class="btn btn-sane btn-lg py-0 rounded-0 my-4 h5" type="submit" value="Anfrage senden">                            
+               {% if craft.app.session.hasFlash('notice') %}
+               <p class="message notice">Anfrage wurde versendet.</p>
+               {% elseif craft.app.session.hasFlash('error') %}
+               <p class="message error">Anfrage fehlgeschlagen.</p>
+               {% endif %}
+            </div>
+         </div>
+      </form>
+   </div>
+</section>
